@@ -11,29 +11,9 @@ const iconDefault = L.icon({
 });
 L.Marker.prototype.options.icon = iconDefault;
 
-const mapWalkingSettings = {
-  center: [ 56.16645066666667,10.197704 ],
-  zoom: 15.45,
-  zoomSnap: 0.2,
-  zoomDelta: 0.2
-};
-const mapRunningSettings = {
-  center: [ 56.13124026666666,10.21245115 ],
-  zoom: 14.4,
-  zoomSnap: 0.2,
-  zoomDelta: 0.2
-};
-const mapBikingSettings = {
-  center: [ 56.217008,10.134032 ],
-  zoom: 12.8,
-  zoomSnap: 0.2,
-  zoomDelta: 0.2
-};
 const mapDrivingSettings = {
-  center: [ 56.214036333333326,10.142817 ],
-  zoom: 12.88,
-  zoomSnap: 0.2,
-  zoomDelta: 0.2
+  center: [ 56.214036333333326, 10.142817 ],
+  zoom: 13
 };
 
 @Component({
@@ -49,7 +29,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.initMap();
     this.markerService.makeMarkersFromJson(this.map);
-  } 
+  }
 
   private initMap(): void {
     this.map = L.map('map', mapDrivingSettings);
