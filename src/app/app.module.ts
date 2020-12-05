@@ -5,18 +5,24 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MarkerService } from './services/marker.service';
+import { TripStatsComponent } from './trip-stats/trip-stats.component';
+import { BackendService } from './services/backend.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    TripStatsComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
-    MarkerService
+    MarkerService,
+    BackendService
   ],
   bootstrap: [AppComponent]
 })

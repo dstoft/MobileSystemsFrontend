@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  mobile-systems-frontend:
+    image: "dstoft/mobile-systems-frontend"
+    container_name: ms-frontend
+    ports:
+      - 3000:80
