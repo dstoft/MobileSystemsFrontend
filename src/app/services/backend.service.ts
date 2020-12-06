@@ -11,11 +11,15 @@ export class BackendService {
   constructor() { }
 
   static buildGetTripsUrl(): string {
-    return this.backendUrlPrefix
+    return this.backendUrlPrefix;
+  }
+
+  static buildGetTripStatsUrl(tripId: number): string {
+    return this.backendUrlPrefix + '/' + tripId + '/stats';
   }
 
   static buildGetCoordinatesUrl(tripId: number): string {
     return this.backendUrlPrefix + "/" + tripId + this.backendCoordinateUrlSuffix;
   }
-  
+
 }

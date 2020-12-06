@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from '../services/marker.service';
 import { BackendService } from '../services/backend.service';
 import { HttpClient } from '@angular/common/http';
+import {TripStatsComponent} from '../trip-stats/trip-stats.component';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -38,14 +39,16 @@ export class MapComponent implements OnInit {
   private map;
 
   selectedTrip: any = null;
-  dropDownList: DropdownModelWithtitle = {title: "Wow", dropDownOptions: []};
-  tripList: Array<any>
+  dropDownList: DropdownModelWithtitle = {title: 'Wow', dropDownOptions: []};
+  tripList: Array<any>;
+
+  @ViewChild('tripStatsComponent') tripStatsComponent: TripStatsComponent;
 
   constructor(private markerService: MarkerService, private http: HttpClient) { }
 
   ngOnInit() {
     this.initMap();
-    this.setTripList()
+    this.setTripList();
   }
 
   private initMap(): void {
@@ -60,9 +63,10 @@ export class MapComponent implements OnInit {
   }
 
   setSelectedTrip(tripListKey: string) {
-    this.selectedTrip = this.tripList[tripListKey]
-    
+    this.selectedTrip = this.tripList[tripListKey];
+
     this.markerService.makeMarkersFromJson(this.map, this.selectedTrip['id']);
+    this.getTripStats();
   }
 
   setTripList() {
@@ -70,11 +74,18 @@ export class MapComponent implements OnInit {
       this.tripList = res;
       this.dropDownList = {title: "Wow", dropDownOptions: []};
       for(var key in res) {
-        var item = res[key]
+        var item = res[key];
         this.dropDownList.dropDownOptions.push({displayName: item['time'], listKey: key, id: item['id']});
       }
     });
-    
+  }
+
+  getTripStats() {
+    const tripId = this.selectedTrip['id'];
+    this.http.get(BackendService.buildGetTripStatsUrl(tripId)).subscribe((res: any) => {
+      // console.log(res);
+      this.tripStatsComponent.setCurrentTrip(res);
+    });
   }
 
 }

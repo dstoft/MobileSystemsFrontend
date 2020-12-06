@@ -1,3 +1,8 @@
-<p>
-  trip-stats works!
+<p *ngIf="currentTripStats">
+  TripId: {{currentTripStats.tripId}},
+  Total seconds: {{currentTripStats.totalSeconds}},
+  Coordinate count: {{currentTripStats.coordinateCount}},
+  Total meters: {{currentTripStats.totalMeters}},
+  Average speed (m/s): {{currentTripStats.avgSpeed}},
+  Average seconds per coordinate: {{currentTripStats.avgSecondsPerCoordinate}}
 </p>

@@ -1,7 +1,9 @@
 <select (change)="setSelectedTrip($event.target.value)" >
     <option *ngFor="let opt of dropDownList.dropDownOptions" [value]="opt.listKey">{{opt.displayName}}</option>
 </select>
-<br /><br />
+<br />
+<app-trip-stats #tripStatsComponent></app-trip-stats>
+<br />
 <div class="map-container">
   <div class="map-frame">
     <div id="map"></div>
